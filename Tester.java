@@ -6,7 +6,7 @@ public class Tester
     {
         Blob blob = new Blob();
         String contents = blob.read("Test.txt");
-        System.out.println(blob.encryptPassword(contents));
+        blob.encryptPassword(contents);
         blob.write();
     }
 }

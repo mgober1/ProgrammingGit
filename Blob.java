@@ -15,6 +15,7 @@ public class Blob
     //write new file to objects folder with sha name
     String sha;
     String contents;
+
     public String read (String fileName) throws IOException
     {
         contents = "";
@@ -59,6 +60,11 @@ public class Blob
         formatter.close();
         sha = result;
         return result;
+    }
+
+    public String getSha()
+    {
+        return sha;
     }
 
     public void write() throws IOException
