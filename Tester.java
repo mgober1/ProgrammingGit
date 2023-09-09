@@ -13,6 +13,6 @@ public class Tester
         index.addBlob("addBlobTest.txt");
         index.addBlob("addBlobTest2.txt");
         index.addBlob("addBlobTest3.txt");
-        
+        index.removeBlob("addBlobTest3.txt");
     }
 }
