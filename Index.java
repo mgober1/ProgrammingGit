@@ -40,23 +40,23 @@ public class Index
     {
         Blob blob = new Blob();
         File file = new File(fileName);
+        File folder = new File ("objects");
+        File[] files = folder.listFiles();
+        folder.mkdir();
         String contents = blob.read(fileName);
         String sha = blob.encryptPassword(contents);
-        file.delete();
-        /*BufferedReader reader = new BufferedReader(new FileReader (index));
-        String fileLine = "";
-        while (reader.ready())
+        File shaFile = new File(sha);
+        for(File f: files) 
         {
-            if (fileLine.equals(fileName + " : " + sha))
-            {
-
+            if(f.getName().equals(shaFile.getName())) 
+            { 
+                f.delete();
             }
-            fileLine += reader.readLine();
         }
-        reader.close();*/
+        file.delete();
 
         File inputFile = new File("index");
-        File tempFile = new File("myTempFile");
+        File tempFile = new File ("myTempFile");
 
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -72,7 +72,18 @@ public class Index
             writer.write(currentLine + System.getProperty("line.separator"));
         }
         writer.close(); 
-        reader.close(); 
-        boolean successful = tempFile.renameTo(inputFile);
+        reader.close();
+        tempFile.renameTo(inputFile);
+        
+        String tempFileContents = "";
+        BufferedReader tempReader = new BufferedReader(new FileReader (tempFile));
+        while (tempReader.ready())
+        {
+            tempFileContents += (char) tempReader.read();
+        }
+        tempReader.close();
+        PrintWriter tempWriter = new PrintWriter (index);
+        tempWriter.print(tempFileContents);
+        tempWriter.close();
     }
 }

@@ -46,6 +46,7 @@ public class Blob
         {
             e.printStackTrace();
         }
+        sha = sha1;
         return sha1;
     }
 
@@ -58,7 +59,6 @@ public class Blob
         }
         String result = formatter.toString();
         formatter.close();
-        sha = result;
         return result;
     }
 
