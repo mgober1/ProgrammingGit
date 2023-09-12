@@ -1,0 +1,52 @@
+[
+    {
+        "className": "Blob",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "read",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            },
+            {
+                "methodName": "encryptPassword",
+                "parameters": ["String"],
+                "values": ["password"]
+            },
+            {
+                "methodName": "byteToHex",
+                "parameters": ["byte[]"],
+                "values": ["hash"]
+            },
+            {
+                "methodName": "getSha",
+                "parameters": [],
+                "values": []
+            },
+            {
+                "methodName": "write"
+            }
+        ]
+    },
+    {
+        "className": "Index",
+        "constructorConfigs": [
+            {
+                "parameterTypes": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "getSha1",
+                "parameters": [],
+                "values": []
+            }
+        ]
+    }
+]
