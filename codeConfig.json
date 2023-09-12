@@ -29,7 +29,9 @@
                 "values": []
             },
             {
-                "methodName": "write"
+                "methodName": "write",
+                "parameters": [],
+                "values": []
             }
         ]
     },
@@ -37,15 +39,41 @@
         "className": "Index",
         "constructorConfigs": [
             {
-                "parameterTypes": ["String"],
-                "values": ["__TEST_FILE_NAME__"]
+                "parameterTypes": [],
+                "values": []
             }
         ],
         "methodConfigs": [
             {
-                "methodName": "getSha1",
+                "methodName": "initialize",
                 "parameters": [],
                 "values": []
+            },
+            {
+                "methodName": "addBlob",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            },
+            {
+                "methodName": "removeBlob",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            }
+        ]
+    },
+    {
+        "className": "Tree",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "add",
+                "parameters": ["String"],
+                "values": ["newLine"]
             }
         ]
     }
