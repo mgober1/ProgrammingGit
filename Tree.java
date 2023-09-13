@@ -12,11 +12,59 @@ public class Tree {
     }
 
     public void add(String newLine) throws IOException {
-        File file = new File("tree");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
+        // File file = new File("tree");
+        // if (!file.exists()) {
+        // file.createNewFile();
+        // }
+        // lines.add(newLine);
+        // StringBuilder content = new StringBuilder();
+        // for (String line : lines) {
+        // if (!content.isEmpty()) {
+        // content.append("\n");
+        // }
+        // content.append(line);
+        // }
+        // PrintWriter writer = new PrintWriter(file);
+        // writer.print(content);
+        // writer.close();
+
         lines.add(newLine);
+    }
+
+    public void remove(String lineToRemove) throws IOException {
+        // File file = new File("tree");
+        // if (!file.exists()) {
+        // file.createNewFile();
+        // }
+        // StringBuilder content = new StringBuilder();
+
+        // for (int i = 0; i < lines.size(); i++) {
+        // if (!lines.get(i).contains(lineToRemove)) {
+        // if (!content.isEmpty()) {
+        // content.append("\n");
+        // }
+        // content.append(lines.get(i));
+        // }
+        // }
+        // for (int i = lines.size() - 1; i >= 0; i--) {
+        // if (lines.get(i).contains(lineToRemove)) {
+        // lines.remove(i);
+        // }
+        // }
+
+        // PrintWriter writer = new PrintWriter(file);
+        // writer.print(content);
+        // writer.close();
+
+        for (int i = lines.size() - 1; i >= 0; i--) {
+            if (lines.get(i).contains(lineToRemove)) {
+                lines.remove(i);
+            }
+        }
+    }
+
+    public void createBlob() throws IOException {
+        Blob blob = new Blob();
         StringBuilder content = new StringBuilder();
         for (String line : lines) {
             if (!content.isEmpty()) {
@@ -24,41 +72,9 @@ public class Tree {
             }
             content.append(line);
         }
-        PrintWriter writer = new PrintWriter(file);
-        writer.print(content);
-        writer.close();
-    }
-
-    public void remove(String lineToRemove) throws IOException {
-        File file = new File("tree");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        StringBuilder content = new StringBuilder();
-
-        for (int i = 0; i < lines.size(); i++) {
-            if (!lines.get(i).contains(lineToRemove)) {
-                if (!content.isEmpty()) {
-                    content.append("\n");
-                }
-                content.append(lines.get(i));
-            }
-        }
-        for (int i = lines.size() - 1; i >= 0; i--) {
-            if (lines.get(i).contains(lineToRemove)) {
-                lines.remove(i);
-            }
-        }
-
-        PrintWriter writer = new PrintWriter(file);
-        writer.print(content);
-        writer.close();
-    }
-
-    public void createBlob() throws IOException {
-        Blob blob = new Blob();
-        String contents = blob.read("tree");
-        blob.encryptPassword(contents);
+        blob.encryptPassword(content.toString());
+        blob.setContents(content.toString());
         blob.write();
+        FileEditor.deleteFile("tree");
     }
 }

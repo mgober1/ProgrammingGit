@@ -62,9 +62,14 @@ public class Blob {
         // File file = new File(sha);
         // file.createNewFile();
         PrintWriter writer = new PrintWriter(file);
+
         writer.write(contents);
         writer.close();
         // file.renameTo(folder);
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 }
 // objects folder gets all of the files
