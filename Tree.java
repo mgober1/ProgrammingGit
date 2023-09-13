@@ -19,10 +19,13 @@ public class Tree {
         lines.add(newLine);
         StringBuilder content = new StringBuilder();
         for (String line : lines) {
-            content.append(line + "\n");
+            if (!content.isEmpty()) {
+                content.append("\n");
+            }
+            content.append(line);
         }
         PrintWriter writer = new PrintWriter(file);
-        writer.println(content);
+        writer.print(content);
         writer.close();
     }
 
@@ -35,7 +38,10 @@ public class Tree {
 
         for (int i = 0; i < lines.size(); i++) {
             if (!lines.get(i).contains(lineToRemove)) {
-                content.append(lines.get(i) + "\n");
+                if (!content.isEmpty()) {
+                    content.append("\n");
+                }
+                content.append(lines.get(i));
             }
         }
         for (int i = lines.size() - 1; i >= 0; i--) {
@@ -45,7 +51,7 @@ public class Tree {
         }
 
         PrintWriter writer = new PrintWriter(file);
-        writer.println(content);
+        writer.print(content);
         writer.close();
     }
 }
