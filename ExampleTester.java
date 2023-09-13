@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,70 +15,51 @@ import org.junit.jupiter.api.Test;
 
 public class ExampleTester {
 
-    @BeforeAll
-    static void setUpBeforeClass() throws Exception {
-        /*
-         * Utils.writeStringToFile("junit_example_file_data.txt", "test file contents");
-         * Utils.deleteFile("index");
-         * Utils.deleteDirectory("objects");
-         */
+    private String sha = "17ed26b0ccf83747502dfc6d7b3ee77da6ee4569";
+    private String content = "Hello0000 !";
 
-        FileEditor.writeFile("junit_example_file_data.txt", "test file contents");
-        FileEditor.deleteFile("index");
-        FileEditor.deleteDirectory("objects");
+    @BeforeAll
+    public static void createTestFiles() {
+        FileEditor.createFile("test.txt");
+        FileEditor.writeFile("test.txt", "Hello0000 !");
     }
 
     @AfterAll
-    static void tearDownAfterClass() throws Exception {
-        /*
-         * Utils.deleteFile("junit_example_file_data.txt");
-         * Utils.deleteFile("index");
-         * Utils.deleteDirectory("objects");
-         */
-
-        FileEditor.deleteFile("junit_example_file_data.txt");
-        FileEditor.deleteFile("index");
-        FileEditor.deleteDirectory("objects");
+    public static void deleteTestFiles() {
+        FileEditor.deleteFile("test.txt");
     }
 
     @Test
-    @DisplayName("[8] Test if initialize and objects are created correctly")
-    void testInitialize() throws Exception {
-
-        // Run the person's code
-        TestHelper.runTestSuiteMethods("testInitialize");
-
-        // check if the file exists
-        File file = new File("index");
-        Path path = Paths.get("objects");
-
+    @DisplayName("[1] Test if blob is created correctly")
+    public void testCreateBlob() throws IOException {
+        Blob blob = new Blob();
+        String contents = blob.read("test.txt");
+        blob.encryptPassword(contents);
+        blob.write();
+        assertEquals("Hello0000 !", contents);
+        File file = new File("objects/" + sha);
         assertTrue(file.exists());
-        assertTrue(Files.exists(path));
     }
 
     @Test
-    @DisplayName("[15] Test if adding a blob works.  5 for sha, 5 for file contents, 5 for correct location")
-    void testCreateBlob() throws Exception {
+    @DisplayName("[2] Test if index is working correctly")
+    public void testIndex() throws IOException {
+        FileEditor.deleteDirectory("objects");
+        FileEditor.deleteFile("index");
 
-        try {
+        Index index = new Index();
+        index.initialize();
+        File indexFile = new File("index");
+        File objectsFolder = new File("objects");
 
-            // Manually create the files and folders before the 'testAddFile'
-            Index myGitClassInstance = new Index();
-            myGitClassInstance.initialize();
+        assertTrue(indexFile.exists());
+        assertTrue(objectsFolder.exists());
 
-            TestHelper.runTestSuiteMethods("testCreateBlob", file1.getName());
+        index.addBlob("test.txt");
+        File blobFile = new File("objects/" + sha);
 
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        }
-
-        // Check blob exists in the objects folder
-        File file_junit1 = new File("objects/" + file1.methodToGetSha1());
-        assertTrue("Blob file to add not found", file_junit1.exists());
-
-        // Read file contents
-        String indexFileContents = MyUtilityClass.readAFileToAString("objects/" + file1.methodToGetSha1());
-        assertEquals("File contents of Blob don't match file contents pre-blob creation", indexFileContents,
-                file1.getContents());
+        assertTrue(blobFile.exists());
+        assertEquals(FileEditor.readFile("index"), content);
     }
+
 }

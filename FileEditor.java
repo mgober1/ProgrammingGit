@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class FileEditor {
     public static void createFile(String fileName) {
@@ -34,5 +35,21 @@ public class FileEditor {
             file.delete();
         }
         directory.delete();
+    }
+
+    public static String readFile(String fileName) {
+        StringBuilder content = new StringBuilder();
+        try {
+            File file = new File(fileName);
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                content.append(reader.nextLine());
+            }
+            reader.close();
+            return content.toString();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return "";
     }
 }
