@@ -54,4 +54,11 @@ public class Tree {
         writer.print(content);
         writer.close();
     }
+
+    public void createBlob() throws IOException {
+        Blob blob = new Blob();
+        String contents = blob.read("tree");
+        blob.encryptPassword(contents);
+        blob.write();
+    }
 }
