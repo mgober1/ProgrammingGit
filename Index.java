@@ -39,22 +39,28 @@ public class Index {
 
     public void removeBlob(String fileName) throws IOException {
         Blob blob = new Blob();
-        File file = new File(fileName);
-        File folder = new File("objects");
-        File[] files = folder.listFiles();
-        folder.mkdir();
         String contents = blob.read(fileName);
         String sha = blob.encryptPassword(contents);
-        File shaFile = new File(sha);
-        for (File f : files) {
-            if (f.getName().equals(shaFile.getName())) {
-                f.delete();
-            }
-        }
-        file.delete();
+
+        // dont want to delete the actual file in the objects folder yet
+        //
+        // File file = new File(fileName);
+        // File folder = new File("objects");
+        // File[] files = folder.listFiles();
+        // folder.mkdir();
+        // File shaFile = new File(sha);
+        // for (File f : files) {
+        // if (f.getName().equals(shaFile.getName())) {
+        // f.delete();
+        // }
+        // }
+        // file.delete();
 
         File inputFile = new File("index");
         File tempFile = new File("myTempFile");
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
 
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -71,7 +77,10 @@ public class Index {
         }
         writer.close();
         reader.close();
-        tempFile.renameTo(inputFile);
+
+        // renaming the file breaks it
+        //
+        // tempFile.renameTo(inputFile);
 
         String tempFileContents = "";
         BufferedReader tempReader = new BufferedReader(new FileReader(tempFile));

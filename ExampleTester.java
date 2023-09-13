@@ -15,28 +15,35 @@ import org.junit.jupiter.api.Test;
 
 public class ExampleTester {
 
-    private String file1Name = "test.txt";
-    private String sha = "17ed26b0ccf83747502dfc6d7b3ee77da6ee4569";
+    private static String file1Name = "test.txt";
+    private static String file1Content = "Hello0000 !";
+    private static String sha = "17ed26b0ccf83747502dfc6d7b3ee77da6ee4569";
+    private static String file2Name = "test2.txt";
+    private static String file2Content = "BiG FILE";
+    private static String sha2 = "600888109412bf4640b08ef4bf210101f5686dec";
 
     @BeforeAll
     public static void createTestFiles() {
-        FileEditor.createFile("test.txt");
-        FileEditor.writeFile("test.txt", "Hello0000 !");
+        FileEditor.createFile(file1Name);
+        FileEditor.writeFile(file1Name, file1Content);
+        FileEditor.createFile(file2Name);
+        FileEditor.writeFile(file2Name, file2Content);
     }
 
     @AfterAll
     public static void deleteTestFiles() {
-        FileEditor.deleteFile("test.txt");
+        FileEditor.deleteFile(file1Name);
+        FileEditor.deleteFile(file2Name);
     }
 
     @Test
     @DisplayName("[1] Test if blob is created correctly")
     public void testCreateBlob() throws IOException {
         Blob blob = new Blob();
-        String contents = blob.read("test.txt");
+        String contents = blob.read(file1Name);
         blob.encryptPassword(contents);
         blob.write();
-        assertEquals("Hello0000 !", contents);
+        assertEquals(file1Content, contents);
         File file = new File("objects/" + sha);
         assertTrue(file.exists());
     }
@@ -55,11 +62,17 @@ public class ExampleTester {
         assertTrue(indexFile.exists());
         assertTrue(objectsFolder.exists());
 
-        index.addBlob("test.txt");
+        index.addBlob(file1Name);
         File blobFile = new File("objects/" + sha);
 
-        assertTrue(blobFile.exists());
-        assertEquals(FileEditor.readFile("index"), file1Name + " : " + sha);
+        index.addBlob(file2Name);
+        File blobFile2 = new File("objects/" + sha2);
+
+        assertTrue(blobFile.exists() && blobFile2.exists());
+        assertEquals(FileEditor.readFile("index"), file1Name + " : " + sha + file2Name + " : " + sha2);
+
+        index.removeBlob(file1Name);
+        assertEquals(FileEditor.readFile("index"), file2Name + " : " + sha2);
     }
 
 }
