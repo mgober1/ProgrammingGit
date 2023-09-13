@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 public class ExampleTester {
 
+    private String file1Name = "test.txt";
     private String sha = "17ed26b0ccf83747502dfc6d7b3ee77da6ee4569";
-    private String content = "Hello0000 !";
 
     @BeforeAll
     public static void createTestFiles() {
@@ -59,7 +59,7 @@ public class ExampleTester {
         File blobFile = new File("objects/" + sha);
 
         assertTrue(blobFile.exists());
-        assertEquals(FileEditor.readFile("index"), content);
+        assertEquals(FileEditor.readFile("index"), file1Name + " : " + sha);
     }
 
 }
