@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ExampleTester {
+public class JUnitTester {
 
     private static String file1Name = "test.txt";
     private static String file1Content = "Hello0000 !";
