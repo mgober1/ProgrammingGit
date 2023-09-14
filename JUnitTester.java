@@ -88,13 +88,13 @@ public class JUnitTester {
         tree.add(blob2);
         tree.createBlob();
 
-        assertEquals(FileEditor.readFile("1c6a0c6a2c15d7a1d65fba9b18dc71aec0f00892"),
+        assertEquals(FileEditor.readFile("objects/1c6a0c6a2c15d7a1d65fba9b18dc71aec0f00892"),
                 tree1 + blob1 + blob2);
 
         tree.remove("file1.txt");
         tree.remove("bd1ccec139dead5ee0d8c3a0499b42a7d43ac44b");
         tree.createBlob();
 
-        assertEquals(FileEditor.readFile("9382eea02da161a06b49b6ca378a1c6122e7109e"), blob2);
+        assertEquals(FileEditor.readFile("objects/9382eea02da161a06b49b6ca378a1c6122e7109e"), blob2);
     }
 }
