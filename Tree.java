@@ -67,7 +67,7 @@ public class Tree {
         Blob blob = new Blob();
         StringBuilder content = new StringBuilder();
         for (String line : lines) {
-            if (!content.isEmpty()) {
+            if (!content.toString().isEmpty()) {
                 content.append("\n");
             }
             content.append(line);
