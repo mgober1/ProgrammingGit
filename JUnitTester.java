@@ -17,8 +17,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Resources;
-import org.junit.rules.ExternalResource;
 
 import Utilities.FileUtils;
 
@@ -34,14 +32,8 @@ public class JUnitTester {
     private String blob1 = "blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f : file1.txt";
     private String blob2 = "blob : 81e0268c84067377a0advddb5cc996c93f6dcf9f : file2.txt";
 
-    // @ClassRule
-    // public static Resource resource = new ClassPathResource("myfile.txt");
-
     @BeforeAll
     public static void createTestFiles() throws URISyntaxException {
-        // URL resource = JUnitTester.class.getResource("ANDREW.jpg");
-        // File andrew = new File(resource.toURI());
-
         FileUtils.createFile(file1Name);
         FileUtils.writeFile(file1Name, file1Content);
         FileUtils.createFile(file2Name);
@@ -110,25 +102,5 @@ public class JUnitTester {
         tree.createBlob();
 
         assertEquals(FileUtils.readFile("objects/9382eea02da161a06b49b6ca378a1c6122e7109e"), blob2);
-    }
-
-    @Test
-    @DisplayName("[4] Test if code is working correctly")
-    public void testCode() throws Exception {
-        Path resourceDirectory = Paths.get("./bin/resources");
-        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-        // File f = new File(absolutePath);
-        // String[] files = f.list();
-        // String s = "";
-        // for (String file : files) {
-        // s += file + "\n";
-        // }
-        // throw new Exception(s);
-
-        File f = new File(absolutePath + "/ANDREW.jpg");
-        throw new Exception("" + f.exists());
-
-        // String content = FileEditor.readFile(absolutePath);
-        // throw new Exception("\n" + content + "\n");
     }
 }
