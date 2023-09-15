@@ -40,4 +40,8 @@ public class Tree {
         blob.write();
         FileUtils.deleteFile("tree");
     }
+
+    public ArrayList<String> getLines() {
+        return lines;
+    }
 }
