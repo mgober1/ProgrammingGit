@@ -1,3 +1,3 @@
 # ProgrammingGit
 
-![ANDREW](ANDREW.jpg)
+![ANDREW](resources/ANDREW.jpg)
