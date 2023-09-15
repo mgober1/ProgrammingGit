@@ -33,7 +33,7 @@ public class JUnitTester {
     private String blob2 = "blob : 81e0268c84067377a0advddb5cc996c93f6dcf9f : file2.txt";
 
     @BeforeAll
-    public static void createTestFiles() throws URISyntaxException {
+    public static void createTestFiles() throws Exception {
         FileUtils.createFile(file1Name);
         FileUtils.writeFile(file1Name, file1Content);
         FileUtils.createFile(file2Name);
@@ -41,14 +41,14 @@ public class JUnitTester {
     }
 
     @AfterAll
-    public static void deleteTestFiles() throws URISyntaxException {
+    public static void deleteTestFiles() throws Exception {
         FileUtils.deleteFile(file1Name);
         FileUtils.deleteFile(file2Name);
     }
 
     @Test
     @DisplayName("[1] Test if blob is created correctly")
-    public void testCreateBlob() throws IOException {
+    public void testCreateBlob() throws Exception {
         Blob blob = new Blob();
         String contents = blob.read(file1Name);
         blob.encryptPassword(contents);
@@ -60,7 +60,7 @@ public class JUnitTester {
 
     @Test
     @DisplayName("[2] Test if index is working correctly")
-    public void testIndex() throws IOException, URISyntaxException {
+    public void testIndex() throws Exception {
         FileUtils.deleteDirectory("objects");
         FileUtils.deleteFile("index");
 
@@ -87,7 +87,7 @@ public class JUnitTester {
 
     @Test
     @DisplayName("[3] Test if tree is working correctly")
-    public void testTree() throws IOException, URISyntaxException {
+    public void testTree() throws Exception {
         Tree tree = new Tree();
         tree.add(tree1);
         tree.add(blob1);

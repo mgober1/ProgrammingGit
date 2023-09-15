@@ -15,7 +15,7 @@ public class Blob {
     String sha;
     String contents;
 
-    public String read(String fileName) throws IOException {
+    public String read(String fileName) throws Exception {
         contents = "";
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         while (reader.ready()) {
@@ -55,7 +55,7 @@ public class Blob {
         return sha;
     }
 
-    public void write() throws IOException {
+    public void write() throws Exception {
         File folder = new File("objects");
         folder.mkdir();
         File file = new File(folder, sha);

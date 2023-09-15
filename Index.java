@@ -11,7 +11,7 @@ public class Index {
     File folder;
 
     // public void initialize(String fileName, String folderName)
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
         index = new File("index");
         if (!index.exists()) {
             index.createNewFile();
@@ -20,7 +20,7 @@ public class Index {
         folder.mkdir();
     }
 
-    public void addBlob(String fileName) throws IOException {
+    public void addBlob(String fileName) throws Exception {
         Blob blob = new Blob();
         String contents = blob.read(fileName);
         String sha = blob.encryptPassword(contents);
@@ -37,7 +37,7 @@ public class Index {
         writer.close();
     }
 
-    public void removeBlob(String fileName) throws IOException {
+    public void removeBlob(String fileName) throws Exception {
         Blob blob = new Blob();
         String contents = blob.read(fileName);
         String sha = blob.encryptPassword(contents);

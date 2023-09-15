@@ -1,7 +1,10 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+
+import Utilities.FileUtils;
 
 public class Tree {
 
@@ -11,51 +14,11 @@ public class Tree {
         lines = new ArrayList<String>();
     }
 
-    public void add(String newLine) throws IOException {
-        // File file = new File("tree");
-        // if (!file.exists()) {
-        // file.createNewFile();
-        // }
-        // lines.add(newLine);
-        // StringBuilder content = new StringBuilder();
-        // for (String line : lines) {
-        // if (!content.isEmpty()) {
-        // content.append("\n");
-        // }
-        // content.append(line);
-        // }
-        // PrintWriter writer = new PrintWriter(file);
-        // writer.print(content);
-        // writer.close();
-
+    public void add(String newLine) throws Exception {
         lines.add(newLine);
     }
 
-    public void remove(String lineToRemove) throws IOException {
-        // File file = new File("tree");
-        // if (!file.exists()) {
-        // file.createNewFile();
-        // }
-        // StringBuilder content = new StringBuilder();
-
-        // for (int i = 0; i < lines.size(); i++) {
-        // if (!lines.get(i).contains(lineToRemove)) {
-        // if (!content.isEmpty()) {
-        // content.append("\n");
-        // }
-        // content.append(lines.get(i));
-        // }
-        // }
-        // for (int i = lines.size() - 1; i >= 0; i--) {
-        // if (lines.get(i).contains(lineToRemove)) {
-        // lines.remove(i);
-        // }
-        // }
-
-        // PrintWriter writer = new PrintWriter(file);
-        // writer.print(content);
-        // writer.close();
-
+    public void remove(String lineToRemove) throws Exception {
         for (int i = lines.size() - 1; i >= 0; i--) {
             if (lines.get(i).contains(lineToRemove)) {
                 lines.remove(i);
@@ -63,7 +26,7 @@ public class Tree {
         }
     }
 
-    public void createBlob() throws IOException {
+    public void createBlob() throws Exception {
         Blob blob = new Blob();
         StringBuilder content = new StringBuilder();
         for (String line : lines) {
@@ -75,6 +38,6 @@ public class Tree {
         blob.encryptPassword(content.toString());
         blob.setContents(content.toString());
         blob.write();
-        FileEditor.deleteFile("tree");
+        FileUtils.deleteFile("tree");
     }
 }
