@@ -104,16 +104,16 @@ public class JUnitTester {
         assertEquals(FileUtils.readFile("objects/9382eea02da161a06b49b6ca378a1c6122e7109e"), blob2);
     }
 
-    // @Test
-    // public void testTest() throws Exception {
-    // Path resourceDirectory = Paths.get("");
-    // String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-    // File f = new File(absolutePath);
-    // String[] fNames = f.list();
-    // String a = "";
-    // for (String fName : fNames) {
-    // a += fName + "\n";
-    // }
-    // throw new Exception(a);
-    // }
+    @Test
+    public void testTest() throws Exception {
+        Path resourceDirectory = Paths.get("");
+        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+        File f = new File(absolutePath);
+        String[] fNames = f.list();
+        String a = "";
+        for (String fName : fNames) {
+            a += fName + "\n";
+        }
+        throw new Exception(a);
+    }
 }

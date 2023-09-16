@@ -50,7 +50,15 @@ public class TreeTest {
     }
 
     @Test
-    void testRemove() {
-
+    void testRemove() throws Exception {
+        Tree tree = new Tree();
+        tree.add(tree1);
+        tree.add(blob1);
+        tree.add(blob2);
+        tree.remove("file1.txt");
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add(tree1);
+        expected.add(blob2);
+        assertEquals("Remove() in Tree does not work", expected, tree.getLines());
     }
 }
