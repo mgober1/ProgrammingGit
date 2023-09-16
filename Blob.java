@@ -56,9 +56,12 @@ public class Blob {
     }
 
     public void write() throws Exception {
-        File folder = new File("objects");
+        File folder = new File("./objects");
         folder.mkdir();
-        File file = new File(folder, sha);
+        File file = new File(folder + "/" + sha);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         // File file = new File(sha);
         // file.createNewFile();
         PrintWriter writer = new PrintWriter(file);

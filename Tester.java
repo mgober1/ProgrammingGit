@@ -27,5 +27,6 @@ public class Tester {
         tree.add("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f : file1.txt");
         tree.add("blob : 883jd88c84dafjkh380jdnkjlcc996c93jdnbudk : file2.txt");
         tree.createBlob();
+        System.out.println("HI");
     }
 }
