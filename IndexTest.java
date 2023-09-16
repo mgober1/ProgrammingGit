@@ -23,12 +23,18 @@ public class IndexTest {
         FileUtils.writeFile(file1Name, contents1);
         FileUtils.createFile(file2Name);
         FileUtils.writeFile(file2Name, contents2);
+        if (FileUtils.fileExists("index")) {
+            FileUtils.deleteFile("index");
+        }
     }
 
     @AfterAll
     static void deleteTestFiles() throws Exception {
         FileUtils.deleteFile(file1Name);
         FileUtils.deleteFile(file2Name);
+        if (FileUtils.fileExists("index")) {
+            FileUtils.deleteFile("index");
+        }
     }
 
     @Test
