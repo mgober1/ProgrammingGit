@@ -35,6 +35,7 @@ public class TreeTest {
         expected.add(blob1);
         expected.add(blob2);
 
+        // Tests that the lines are added correctly
         assertEquals("Add() in Tree does not work", expected, tree.getLines());
     }
 
@@ -45,6 +46,8 @@ public class TreeTest {
         tree.add(blob1);
         tree.add(blob2);
         tree.createBlob();
+
+        // Tests that the blob file for the tree is created in the objects folder
         assertTrue("CreateBlob() in Tree does not create the correct blob in the objects folder",
                 FileUtils.fileExists("objects/" + FileUtils.sha1(tree1 + "\n" + blob1 + "\n" + blob2)));
     }
@@ -59,6 +62,8 @@ public class TreeTest {
         ArrayList<String> expected = new ArrayList<String>();
         expected.add(tree1);
         expected.add(blob2);
+
+        // Tests that the correct lines are removed
         assertEquals("Remove() in Tree does not work", expected, tree.getLines());
     }
 }

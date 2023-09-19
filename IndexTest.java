@@ -42,6 +42,7 @@ public class IndexTest {
         Index index = new Index();
         index.initialize();
 
+        // Tests that the index file and objects folder are created
         assertTrue("initialize() in Index does not create the index file", FileUtils.fileExists("index"));
         assertTrue("initialize() in Index does not create the objects folder", FileUtils.fileExists("objects"));
     }
@@ -54,10 +55,12 @@ public class IndexTest {
         index.addBlob(file1Name);
         index.addBlob(file2Name);
 
+        // Tests that the blob files are created in the objects folder
         assertTrue("addBlob() in Index does not create the blob file in the objects folder",
                 FileUtils.fileExists("objects/" + FileUtils.sha1(contents1))
                         && FileUtils.fileExists("objects/" + FileUtils.sha1(contents2)));
 
+        // Tests that the correct line is added to the index file
         assertEquals("addBlob() in Index does not add the correct line to the index file",
                 "test.txt : " + FileUtils.sha1(contents1) + "test2.txt : " +
                         FileUtils.sha1(contents2),
@@ -75,6 +78,7 @@ public class IndexTest {
 
         index.removeBlob(file1Name);
 
+        // Tests that the correct line is removed from the index file
         assertEquals("removeBlob() in Index does not remove the correct line from the index file",
                 "test2.txt : " + FileUtils.sha1(contents2),
                 FileUtils.readFile("index"));
