@@ -8,53 +8,42 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 
-public class Blob
-{
-    //read file
-    //get sha of contents
-    //write new file to objects folder with sha name
+public class Blob {
+    // read file
+    // get sha of contents
+    // write new file to objects folder with sha name
     String sha;
     String contents;
 
-    public String read (String fileName) throws IOException
-    {
+    public String read(String fileName) throws Exception {
         contents = "";
-        BufferedReader reader = new BufferedReader(new FileReader (fileName));
-        while (reader.ready())
-        {
-            contents += (char)reader.read();
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        while (reader.ready()) {
+            contents += (char) reader.read();
         }
         reader.close();
         return contents;
     }
 
-    public String encryptPassword(String password)
-    {
+    public String encryptPassword(String password) {
         String sha1 = "";
-        try
-        {
+        try {
             MessageDigest crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
             crypt.update(password.getBytes("UTF-8"));
             sha1 = byteToHex(crypt.digest());
-        }
-        catch(NoSuchAlgorithmException e)
-        {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }
-        catch(UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         sha = sha1;
         return sha1;
     }
 
-    public String byteToHex(final byte[] hash)
-    {
+    public String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
-        for (byte b : hash)
-        {
+        for (byte b : hash) {
             formatter.format("%02x", b);
         }
         String result = formatter.toString();
@@ -62,23 +51,30 @@ public class Blob
         return result;
     }
 
-    public String getSha()
-    {
+    public String getSha() {
         return sha;
     }
 
-    public void write() throws IOException
-    {
-        File folder = new File("objects");
+    public void write() throws Exception {
+        File folder = new File("./objects");
         folder.mkdir();
-        File file = new File (folder, sha);
-        //File file = new File(sha);
-        //file.createNewFile();
-        PrintWriter writer = new PrintWriter (file);
+        File file = new File(folder + "/" + sha);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        // File file = new File(sha);
+        // file.createNewFile();
+        PrintWriter writer = new PrintWriter(file);
+
         writer.write(contents);
         writer.close();
-        //file.renameTo(folder);
+        // file.renameTo(folder);
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 }
-//objects folder gets all of the files
-//index makes a list of original file names that were added to objects folder and the new name that is in the objects folder
+// objects folder gets all of the files
+// index makes a list of original file names that were added to objects folder
+// and the new name that is in the objects folder

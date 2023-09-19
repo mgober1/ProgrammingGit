@@ -1,0 +1,80 @@
+[
+    {
+        "className": "Blob",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "read",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            },
+            {
+                "methodName": "encryptPassword",
+                "parameters": ["String"],
+                "values": ["password"]
+            },
+            {
+                "methodName": "byteToHex",
+                "parameters": ["byte[]"],
+                "values": ["hash"]
+            },
+            {
+                "methodName": "getSha",
+                "parameters": [],
+                "values": []
+            },
+            {
+                "methodName": "write",
+                "parameters": [],
+                "values": []
+            }
+        ]
+    },
+    {
+        "className": "Index",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "initialize",
+                "parameters": [],
+                "values": []
+            },
+            {
+                "methodName": "addBlob",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            },
+            {
+                "methodName": "removeBlob",
+                "parameters": ["String"],
+                "values": ["__TEST_FILE_NAME__"]
+            }
+        ]
+    },
+    {
+        "className": "Tree",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "add",
+                "parameters": ["String"],
+                "values": ["newLine"]
+            }
+        ]
+    }
+]
