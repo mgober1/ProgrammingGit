@@ -1,8 +1,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 import Utilities.FileUtils;
 
@@ -43,5 +47,31 @@ public class Tree {
 
     public ArrayList<String> getLines() {
         return lines;
+    }
+
+    public String getSha1 (String password)
+    {
+            String sha1 = "";
+            try {
+                MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+                crypt.reset();
+                crypt.update(password.getBytes("UTF-8"));
+                sha1 = byteToHex(crypt.digest());
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return sha1;
+        }
+
+        public String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 }
