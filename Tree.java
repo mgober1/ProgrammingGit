@@ -1,8 +1,5 @@
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import Utilities.FileUtils;
 public class Tree {
 
     protected ArrayList<String> lines;
+    static ArrayList<File> fileList;
 
     public Tree() {
         lines = new ArrayList<String>();
@@ -73,5 +71,26 @@ public class Tree {
         String result = formatter.toString();
         formatter.close();
         return result;
+    }
+
+    public String addDirectory(String directoryPath)
+    {
+        String sha = "";
+        File directory = new File(directoryPath);
+        traverseDir(directory);
+        return sha;
+    }
+
+    public static void traverseDir(File dir)
+    {
+        File[] files = dir.listFiles();
+        if(files != null)
+        {
+            for (final File file : files)
+            {
+                traverseDir(file);
+            }
+        }
+        fileList.add(dir.getAbsoluteFile());
     }
 }
