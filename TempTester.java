@@ -1,11 +1,10 @@
-import java.io.File;
-
 public class TempTester
 {
-    public static void main (String [] args)
+    public static void main (String [] args) throws Exception
     {
         Tree tree = new Tree();
-        File testFolder = new File("testFolder");
-        tree.traverseDir(testFolder);
+        /*File testFolder = new File("testfolder");
+        tree.traverseDir(testFolder);*/
+        tree.addDirectory("testfolder");
     }
 }

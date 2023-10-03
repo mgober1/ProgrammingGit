@@ -14,6 +14,7 @@ public class Tree {
 
     public Tree() {
         lines = new ArrayList<String>();
+        fileList = new ArrayList<File>();
     }
 
     public void add(String newLine) throws Exception {
@@ -73,11 +74,19 @@ public class Tree {
         return result;
     }
 
-    public String addDirectory(String directoryPath)
+    public String addDirectory(String directoryPath) throws Exception
     {
         String sha = "";
+        String line = "";
         File directory = new File(directoryPath);
         traverseDir(directory);
+        for (File file : fileList)
+        {
+            Blob blob = new Blob();
+            sha = blob.encryptPassword(blob.read(file.getName()));
+            line = "blob : " + sha + " : " + file.getName();
+            add(line);
+        }
         return sha;
     }
 
@@ -91,6 +100,6 @@ public class Tree {
                 traverseDir(file);
             }
         }
-        fileList.add(dir.getAbsoluteFile());
+        fileList.add(dir);
     }
 }
