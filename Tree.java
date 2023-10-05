@@ -11,6 +11,7 @@ public class Tree {
 
     protected ArrayList<String> lines;
     static ArrayList<File> fileList;
+    private String sha;
 
     public Tree() {
         lines = new ArrayList<String>();
@@ -29,7 +30,7 @@ public class Tree {
         }
     }
 
-    public void createBlob() throws Exception {
+    public String createBlob() throws Exception {
         Blob blob = new Blob();
         StringBuilder content = new StringBuilder();
         for (String line : lines) {
@@ -38,10 +39,11 @@ public class Tree {
             }
             content.append(line);
         }
-        blob.encryptPassword(content.toString());
+        sha = blob.encryptPassword(content.toString());
         blob.setContents(content.toString());
         blob.write();
         FileUtils.deleteFile("tree");
+        return sha;
     }
 
     public ArrayList<String> getLines() {
